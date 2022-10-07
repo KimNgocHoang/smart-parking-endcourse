@@ -1,0 +1,11 @@
+@media only screen and (max-width: 991px) {
+    .garage .box {
+        width: calc(50% - 30px);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .garage .box {
+        width: calc(100% - 30px);
+    }
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Car</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shorcode.css">
+    <link rel="stylesheet" href="css/reponsive.css">
+    <link rel="shortcut icon" href="css/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="css/favicon.png">
+    <!-- Favicon and Touch Icons  -->
+    
+</head>
+<body>
+  
+    <div id="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headerinner">
+                            <h1 class="heading">Bãi xe</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-12">
+                          <div class="action">
+                            <h4 class="title">Điều khiển Barie: </h4>
+                        </div>
+                        <div class="wrap-button">
+                            <a href="/off" class="button-style mr30"><span>Đóng</span></a>
+                            <a href="/on" class="button-style"><span >Mở</span></a>
+                        </div>
+                        <div class="action">
+                            <h4 class="title" id="state"></h4>
+                        </div>
+
+                        <div class="action">
+                            <h4 class="title">Số xe trong bãi : </h4><span id="count">%COUNT%</span>
+                        </div>
+                        <div class="action">
+                            <h4 class="title">Số chỗ còn trống :</h4><span id="slot">%SLOT%</span>
+                        </div>
+                        <div class="action" >
+                          <span hidden id="s1">%S1%</span> 
+                          <span hidden id="s2">%S2%</span>
+                          <span hidden id="s3">%S3%</span>
+                          <span hidden id="s4">%S4%</span>
+                          <span hidden id="s5">%S5%</span>
+                          <span hidden id="s6">%S6%</span>
+                      </div>
+                      
+                    </div>
+                    <div>
+
+                    </div>
+                      <div class="col-md-12">
+                        <div class="action">
+                          <div class='square-box' id="squareColor1">
+                            <div class='square-content'>
+                                <h3 id="te1"></h3>
+                            </div>
+                          </div>
+                          &ensp;&ensp;&ensp;&ensp;
+                          <div class='square-box' id="squareColor2">
+                            <div class='square-content'>
+                                <h3 id="te2"></h3>
+                            </div>
+                          </div>
+                          &ensp;&ensp;&ensp;&ensp;
+                          <div class='square-box' id="squareColor3">
+                            <div class='square-content'>
+                                <h3 id="te3"></h3>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div class="action">
+                          <div class='square-box' id="squareColor4">
+                            <div class='square-content'>
+                                <h3 id="te4"></h3>
+                            </div>
+                          </div>
+                          &ensp;&ensp;&ensp;&ensp;
+                          <div class='square-box' id="squareColor5">
+                            <div class='square-content'>
+                                <h3 id="te5"></h3>
+                            </div>
+                          </div>
+                          &ensp;&ensp;&ensp;&ensp;
+                          <div class='square-box' id="squareColor6">
+                            <div class='square-content'>
+                                <h3 id="te6"></h3>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </section>
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-content">
+                            <p>Parking by LYN</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+        </footer>
+    </div>
+    <script>
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("count").innerHTML = this.responseText;
+            }
+            if (getText("count") == "6"){
+              document.getElementById("state").innerHTML = "FULL SLOT";
+              document.getElementById("state").style.color = "#f60b0b";
+            }
+            else {
+              document.getElementById("state").innerHTML = "SLOT AVAILABLE";
+              document.getElementById("state").style.color = "#3af60b";
+            }
+          };
+          xhttp.open("GET", "/count", true);
+          xhttp.send();
+        }, 1000 ) ;
+      
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("slot").innerHTML = this.responseText;
+            }
+          };
+          xhttp.open("GET", "/slot", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+
+        function getText(id){
+          var t = document.getElementById(id).innerText;
+          
+          return t;
+        };
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s1").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor1").style.backgroundColor = "#f60b0b";
+                document.getElementById("te1").innerHTML = "SLOT 1 FULL"
+              }
+              else {
+                document.getElementById("squareColor1").style.backgroundColor = "#3af60b";
+                document.getElementById("te1").innerHTML = "SLOT 1 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s1", true);
+          xhttp.send();
+        }, 1000 ) ;
+        
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s2").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor2").style.backgroundColor = "#f60b0b";
+                document.getElementById("te2").innerHTML = "SLOT 2 FULL"
+              }
+              else {
+                document.getElementById("squareColor2").style.backgroundColor = "#3af60b";
+                document.getElementById("te2").innerHTML = "SLOT 2 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s2", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s3").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor3").style.backgroundColor = "#f60b0b";
+                document.getElementById("te3").innerHTML = "SLOT 3 FULL"
+              }
+              else {
+                document.getElementById("squareColor3").style.backgroundColor = "#3af60b";
+                document.getElementById("te3").innerHTML = "SLOT 3 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s3", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s4").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor4").style.backgroundColor = "#f60b0b";
+                document.getElementById("te4").innerHTML = "SLOT 4 FULL"
+              }
+              else {
+                document.getElementById("squareColor4").style.backgroundColor = "#3af60b";
+                document.getElementById("te4").innerHTML = "SLOT 4 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s4", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s5").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor5").style.backgroundColor = "#f60b0b";
+                document.getElementById("te5").innerHTML = "SLOT 5 FULL"
+              }
+              else {
+                document.getElementById("squareColor5").style.backgroundColor = "#3af60b";
+                document.getElementById("te5").innerHTML = "SLOT 5 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s5", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+        setInterval(function ( ) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("s6").innerHTML = this.responseText;
+              if (this.responseText == "1"){
+                document.getElementById("squareColor6").style.backgroundColor = "#f60b0b";
+                document.getElementById("te6").innerHTML = "SLOT 6 FULL"
+              }
+              else {
+                document.getElementById("squareColor6").style.backgroundColor = "#3af60b";
+                document.getElementById("te6").innerHTML = "SLOT 6 EMPTY"
+              }
+            }
+          };
+          xhttp.open("GET", "/s6", true);
+          xhttp.send();
+        }, 1000 ) ;
+
+      </script>
+</body>
+</html>

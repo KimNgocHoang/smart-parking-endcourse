@@ -1,0 +1,42 @@
+.mr30 {
+    margin-right: 30px;
+}
+
+.section .wrap-button {
+    margin-bottom: 50px;
+}
+.section .action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+}
+.section .title {
+    min-width: 230px;
+}
+.section .action span {
+    margin-left: 15px;
+    color: #0084c5;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.5;
+}
+.garage {
+    margin-top: 100px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    margin-left: -30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.garage .box {
+    width: calc(33.333% - 30px);
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
