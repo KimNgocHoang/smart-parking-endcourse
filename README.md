@@ -17,3 +17,4 @@ Trình tự chạy chương trình:
 - Cuối cùng mở Serial Monitor để xem địa chỉ IP, gán IP đó vào trình duyệt (lưu ý wifi của client và wifi điền trong file testCK.ino phải giống nhau).
 
 # Sơ đồ lắp mạch
+![smartcart](https://user-images.githubusercontent.com/80655006/194472178-e836f672-cdac-44e7-a17c-dd02810862c2.png)
